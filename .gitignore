@@ -1,44 +1,75 @@
-# Python
+# Python environments, caches, and generated packaging files
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
+.venv-*/
 venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+/build/
+/dist/
+.coverage
+.coverage.*
+htmlcov/
 
-# Data (not needed)
-train/
-valid/
-test/
+# Raw image datasets and intermediate training artifacts
+# Keep tests/ (automated tests) available to Git.
+/train/
+/valid/
+/test/
+/EfficientNetV2/
+/__notebook_source__.ipynb
 
-# IDE
+# React dependencies and generated frontend output
+node_modules/
+/frontend/dist/
+
+# Generated local vector index; rebuild from knowledge/ documents
+/.wafer_vectors/
+
+# Local configuration and secrets; allow documented templates
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+.envrc
+
+# Editor settings and compiled Java output
 .vscode/
 .idea/
+*.class
 
-# Temporary files
+# Logs, temporary files, and document-review output
+*.log
 *.tmp
 ~$*
+/.tmp-doc-review/
+*.db-journal
+*.db-wal
+*.db-shm
+.DS_Store
+Thumbs.db
+Desktop.ini
 
-# Other files 
-*.pptx
-*.pdf
-*.txt
-*.docx
-*.png
-*.jpg
-*.jpeg
-*.csv
-model/M/*.keras
-#model/M/*model.onnx
-model/S/*.keras
-#model/S/*model.onnx
+# Local presentation drafts and loose exports in the project root only.
+# Curated files under docs/ (including images and PDFs) remain available.
+/*.docx
+/*.pptx
+/*.pdf
+/*.png
+/*.jpg
+/*.jpeg
+/*.csv
 
-EfficientNetV2/*
-src/anomaly.py
-src/predict.py
-src/train.py
-LICENSE
-Readme.md
-__notebook_source__.ipynb
+# Private/local working notes (do not ignore all .txt files)
+/Docker hub series step example(not to public).txt
+/prompt for generating slides.txt
+/半導體瑕疵檢測專案建議方向(供參).txt
 
-# Add ignore rules on the remote end
-*.log
-.env
+# Keep README, LICENSE, source, tests, requirements, and validation reports.
+# Keep the root S/M SQLite databases used by the demo and baseline checks.
+# Release models under model/ are managed by .gitattributes (Git LFS).
