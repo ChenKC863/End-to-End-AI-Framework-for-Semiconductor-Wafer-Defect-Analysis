@@ -498,14 +498,8 @@ Passing checks does not establish semantic correctness. In particular, `extracti
 
 ## Recorded validation evidence and limits
 
-The saved report which would be docs/knowledge-live-validation.json records dataset S with llama3.2:3b: count 7,011, five ordered Donut rows matching SQLite, and source-excerpt fallback for both RAG cases. English generation omitted the S/M comparison; Chinese generation repeated the question. Its 12 checks passed, but both RAG generations were rejected.
-
-When copying this section into the repository-root README, use `docs/knowledge-live-validation.json` as the report link target.
-
-The historical unit-test run passed 36 tests. Five validation-script tests were subsequently added and passed separately. Use the output of a fresh full-suite run when reporting the current total and duration. Do not relabel the historical run or infer live success for other dataset/model combinations.
-
-The curated knowledge corpus explains project settings and score interpretation; it does not contain manufacturing SOPs or evidence sufficient to diagnose process failures. Citation, excerpt, repetition, and targeted omission checks do not replace semantic review. Localhost execution, container publication, and verified deployment are distinct milestones.
-
+The saved report `docs/knowledge-live-validation.json` records dataset S with `llama3.2:3b`: a count of 7,011, five ordered Donut rows matching SQLite, and source-excerpt fallback for both
+RAG cases. English generation omitted the S/M comparison; Chinese generation repeated the question. All 12 evidence checks passed, but both RAG generations were rejected.
 
 ## Training
 
