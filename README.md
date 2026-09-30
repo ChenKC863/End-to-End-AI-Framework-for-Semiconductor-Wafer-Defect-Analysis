@@ -321,6 +321,47 @@ npm.cmd run dev
 
 Open the URL printed by Vite (normally [http://127.0.0.1:5173/](http://127.0.0.1:5173/)); its API proxy targets port 8001. FastAPI and Ollama remain necessary. The built mode does not require Vite. Rebuild after frontend changes and restart the API after backend changes; these API commands do not enable automatic reload.
 
+#### React query demonstrations
+
+These browser examples show selected datasets, models, prompts,
+generated SQL, and returned records. They are separate from the
+automated live-validation reports.
+
+##### Chinese React queries
+
+
+##### English React queries
+
+
+##### The example of explicit query for the class of Donut
+
+
+
+#### Swagger API demonstrations
+
+##### Swagger endpoint overview
+
+
+##### /api/health request and response
+
+
+The health response reports API status and model information. inference_checked: false means this request did not test model inference.
+
+##### /api/overview request and response
+
+
+##### /api/query request and response
+
+
+
+#### Agent — record count
+
+The following browser examples ask for the total number of records
+and display the SQL evidence.
+
+
+
+
 ### 8. Validate application logic and live model results
 
 Run each command separately in Terminal D from the project root. The live stage requires the port 8001 API, Ollama, and a ready knowledge index.
