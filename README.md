@@ -162,125 +162,127 @@ To use a specific variant, set the environment variable `MODEL_VARIANT=S` or `MO
 
 • During inference, `infer.py` calls functions such as `preprocess_image_pil`. If `preprocess.py` is missing, inference will fail.
 
-### 4. Start the REST API Server and Java Client
-**Server (Windows CMD)**
-```bash
-# Set environment variables
-set ONNX_MODEL_PATH=model/S/best_model.onnx
-set LABEL_ENCODER_PATH=model/S/label_encoder.pkl
-set VARIANT_PATH=model/S/variant.txt
-set OLLAMA_URL=http://localhost:11434/api/generate
-set OLLAMA_MODEL=llama3.2:3b # If the ollama model is qwen2.5-coder:7b, please replace llama3.2:3b by qwen2.5-coder:7b.
+### 7. Launch the React query interface and RAG/Agent assistant
 
-# Start the server
-uvicorn inference_api:app --host 0.0.0.0 --port 8000 --reload
-```
-(For Linux/macOS, replace "set" with "export". For M variant, change S to M in the paths.)
+This application uses FastAPI on port 8001, SQLite for wafer data, Ollama for generation and embeddings, and Qdrant local mode for curated document retrieval. It does not need the ONNX inference API on port 8000.
 
-**Java client**
+| Terminal | Responsibility |
+|---|---|
+| A | Ollama, if started manually |
+| B | React-facing FastAPI service on port 8001 |
+| C | Vite development server, when using development mode |
+| D | Installation, index building, frontend builds, and validation |
 
-Compile and run the provided Java client(requires JDK 11+):
-```bash
-javac java_client/WaferDefectClient.java
-java WaferDefectClient test.jpg http://localhost:8000/predict
-```
-or test with curl :
-```bash
-curl -X POST -F "file=@test.jpg" http://localhost:8000/predict
-```
-The output of example is such as
-```bash
-Status code: 200
-Response: {"predicted_class":"Center","confidence":0.XXXXXXXXXXX,"probabilities":{...}}
-```
-### 5. Quick Start (with Docker)
+**First-time setup — Terminal D, project root**
 
-The pre‑built images are available on [Docker Hub](https://hub.docker.com/r/steven710382/wafer-model/tags).
+Use a Python version compatible with the dependencies and a Node.js version supported by the installed Vite release. Create the environment only if it does not already exist:
 
-Pull and run the S variant (if for the M variant, replace :S with :M):
-
-### Run with pre-built Docker image (recommended)
-```bash
-docker pull steven710382/wafer-model:S
-docker run --rm -v /path/to/your/image.jpg:/data/test.jpg steven710382/wafer-model:S /data/test.jpg
-```
-
-### Build an image from source code
-```bash
-docker build --build-arg MODEL_VARIANT=S -t wafer-model:S .
-docker run --rm -v /path/to/your/image.jpg:/data/test.jpg wafer-model:S /data/test.jpg
-```
-
-**Note**: Replace `/path/to/your/image.jpg` with the absolute path to your image file.
-
-The output will show the predicted class and confidence.
-
-
-## 6. Launch natural language query interface
-
-First, ensure Ollama is installed and running (it usually starts as a background service). If not, start it manually:
-
-```bash
-ollama serve
-```
-
-Then pull the required model(s). For example,
-```bash
+```powershell
+py -m venv .venv-react
+.\.venv-react\Scripts\python.exe -m pip install -r requirements-rag.in
+ollama pull embeddinggemma
 ollama pull llama3.2:3b
-# or
 ollama pull qwen2.5-coder:7b
 ```
 
-Finally, run the Streamlit app:
-```bash
-streamlit run wafer_llm_query/app.py
+`requirements-rag.in` includes the React API requirements. Ollama must be running before building the index. With the query API stopped, build from `knowledge/*.md`:
+
+```powershell
+$env:OLLAMA_NUM_GPU = '0'
+.\.venv-react\Scripts\python.exe -m wafer_llm_query.build_knowledge
 ```
-Open http://localhost:8501 and start querying (e.g., “Donut 類別中，異常分數最高的前 5 筆資料是哪幾張圖片？”).
 
-## 🧪 Example Results
-Classification output (sample)
-```text
-Predicted class: Center
-Confidence: 0.9622
+This example uses CPU inference. Rebuild after changing curated documents or the embedding model; do not rebuild during concurrent API access. The index is generated locally under `.wafer_vectors/` and is not included in Git.
+
+**Build the frontend — Terminal D**
+
+```powershell
+cd frontend
+npm.cmd ci
+npm.cmd run build
+cd ..
 ```
-Natural language query 
 
-(Chinese)
+**Start the query API — Terminal B, project root**
 
-User prompt:
+```powershell
+$env:OLLAMA_NUM_GPU = '0'
+$env:OLLAMA_MODEL = 'llama3.2:3b'
+.\.venv-react\Scripts\python.exe -m uvicorn wafer_llm_query.react_api:app --host 127.0.0.1 --port 8001
+```
 
-Donut 類別中，異常分數最高的前 5 筆資料是哪幾張圖片？
+Use one API worker for the Qdrant local demonstration. Environment variables set in Terminal D do not automatically apply to Terminal B.
 
-Generated SQL:
+- Built React application: [http://127.0.0.1:8001/](http://127.0.0.1:8001/)
+- Swagger API documentation: [http://127.0.0.1:8001/docs](http://127.0.0.1:8001/docs)
+- Knowledge-index status: [http://127.0.0.1:8001/api/knowledge/status](http://127.0.0.1:8001/api/knowledge/status)
 
-SELECT image_path FROM wafers WHERE LOWER(pred_label) = LOWER('Donut') ORDER BY anomaly_score DESC LIMIT 5;
+Select S or M, a generation model, and English or Traditional Chinese. Use the SQL query interface for records, RAG for document questions, or Agent for document retrieval and/or SQL. Explicit model selections in requests take precedence over applicable backend defaults.
 
-<img width="1388" height="698" alt="image" src="https://github.com/user-attachments/assets/b152111e-7596-42f3-b7be-f60409990ecd" />
+For frontend development, start Vite in Terminal C instead:
 
-<img width="1373" height="689" alt="image" src="https://github.com/user-attachments/assets/f5127b24-8f0e-42c2-8c0b-910961276424" />
+```powershell
+cd frontend
+npm.cmd run dev
+```
 
-<img width="1367" height="678" alt="image" src="https://github.com/user-attachments/assets/7c8aea38-fe21-438b-86df-ca9afead3e05" />
+Open the URL printed by Vite (normally [http://127.0.0.1:5173/](http://127.0.0.1:5173/)); its API proxy targets port 8001. FastAPI and Ollama remain necessary. The built mode does not require Vite. Rebuild after frontend changes and restart the API after backend changes; these API commands do not enable automatic reload.
 
-<img width="1368" height="691" alt="image" src="https://github.com/user-attachments/assets/7b2494a8-2773-47bb-ad93-d74519a5dae8" />
+### 8. Validate application logic and live model results
 
+Run each command separately in Terminal D from the project root. The live stage requires the port 8001 API, Ollama, and a ready knowledge index.
 
-(English)
+```powershell
+$dataset = 'S'                 # Choose S or M
+$model = 'llama3.2:3b'         # Or qwen2.5-coder:7b
+$modelTag = $model.Replace(':', '-')
+$report = "docs/knowledge-live-$dataset-$modelTag-run01.json"
 
-User prompt:
+.\.venv-react\Scripts\python.exe -m unittest discover -s tests -v
+.\.venv-react\Scripts\python.exe scripts/verify_knowledge_live.py --url http://127.0.0.1:8001 --database $dataset --model $model --output $report
+.\.venv-react\Scripts\python.exe scripts/verify_knowledge_live.py --check-only --database $dataset --model $model --output $report
+```
 
-In the Donut category, which 5 images have the highest outlier scores?
+Unit tests use mocked model responses and temporary stores. Each live execution sends four prompts for one dataset/model combination: English RAG, Traditional Chinese RAG, English Agent count, and an English Agent combined Donut/document question.
 
-Generated SQL:
+Check-only mode does not call Ollama. It evaluates 12 evidence checks, including count and ordered-row comparisons with the selected SQLite baseline. Keep failures and fallback states in the report. Use a new filename for each recorded run because reusing a path overwrites its contents.
 
-SELECT image_path FROM wafers WHERE LOWER(pred_label) = LOWER('Donut') ORDER BY anomaly_score DESC LIMIT 5;
+Passing checks does not establish semantic correctness. In particular, `extractive_fallback` is an accepted explicit state: it indicates that source excerpts replaced a rejected or unavailable generated explanation. Browser interaction tests and Linux/deployment tests require separate evidence.
 
-<img width="1387" height="696" alt="image" src="https://github.com/user-attachments/assets/a9591620-b7be-445b-abc2-360de0f89a71" />
+## Example questions and interpretation
 
-<img width="1372" height="693" alt="image" src="https://github.com/user-attachments/assets/b6f379c0-141a-410f-b8ba-26a7c5a8f4da" />
+**RAG — document explanation**
 
-<img width="1368" height="670" alt="image" src="https://github.com/user-attachments/assets/1dab4b30-7dd9-4501-820e-c312eeee55a0" />
+> What does a negative anomaly_score mean? Can anomaly_score values from S and M be directly compared? Explain the limitations and cite the retrieved sources.
 
-<img width="1372" height="686" alt="image" src="https://github.com/user-attachments/assets/23f4943f-15d7-4edb-bc5f-d5070d0cab5a" />
+**Agent — records and document explanation**
+
+> List the five lowest anomaly_score values where true_label and pred_label are both Donut, showing image_path and anomaly_score. Explain what a negative anomaly score means.
+
+For the data portion, the baseline SQL is:
+
+```sql
+SELECT image_path, anomaly_score
+FROM wafers
+WHERE LOWER(true_label) = 'donut'
+  AND LOWER(pred_label) = 'donut'
+ORDER BY anomaly_score ASC
+LIMIT 5;
+```
+
+This is a reference query, not a promise that the model always generates it. Lower Isolation Forest decision-function values indicate greater model-assessed abnormality within the same trained class-specific model. Scores are not probabilities or physical defect severity measurements, and should not be used to compare severity directly across classes or S/M models.
+
+Older screenshots using `ORDER BY anomaly_score DESC` demonstrate retrieval of the highest numerical scores, not the most anomalous records. A query filtering only `pred_label` also differs from the two-label baseline above. Label such screenshots as historical examples and retain their actual prompts and SQL; do not present them as evidence for this new baseline.
+
+## Recorded validation evidence and limits
+
+The saved report [knowledge-live-validation.json](knowledge-live-validation.json) records dataset S with llama3.2:3b: count 7,011, five ordered Donut rows matching SQLite, and source-excerpt fallback for both RAG cases. English generation omitted the S/M comparison; Chinese generation repeated the question. Its 12 checks passed, but both RAG generations were rejected.
+
+When copying this section into the repository-root README, use `docs/knowledge-live-validation.json` as the report link target.
+
+The historical unit-test run passed 36 tests. Five validation-script tests were subsequently added and passed separately. Use the output of a fresh full-suite run when reporting the current total and duration. Do not relabel the historical run or infer live success for other dataset/model combinations.
+
+The curated knowledge corpus explains project settings and score interpretation; it does not contain manufacturing SOPs or evidence sufficient to diagnose process failures. Citation, excerpt, repetition, and targeted omission checks do not replace semantic review. Localhost execution, container publication, and verified deployment are distinct milestones.
 
 
 ## Training
