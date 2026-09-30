@@ -382,7 +382,30 @@ The health response reports API status and model information. `inference_checked
 The following browser examples ask for the total number of records
 and display the SQL evidence.
 
+##### English Agent count using Llama: answer and SQL evidence
 
+<img width="1553" height="661" alt="image" src="https://github.com/user-attachments/assets/96532dc7-2167-4be7-8434-fa8fc32f3ccc" />
+<img width="1331" height="922" alt="image" src="https://github.com/user-attachments/assets/8532c74f-e9fc-48d0-beac-bcee1d1e06d6" />
+
+##### English Agent count using Qwen: answer and SQL evidence
+
+<img width="1558" height="650" alt="image" src="https://github.com/user-attachments/assets/6e55da22-0a8d-480f-8076-e775acec54f7" />
+<img width="1334" height="920" alt="image" src="https://github.com/user-attachments/assets/2f66c5f1-8ffe-4dea-a198-ae67828218d3" />
+
+##### Llama combined query: answer, document sources, and SQL results
+
+<img width="1580" height="656" alt="image" src="https://github.com/user-attachments/assets/aa7186d1-8fa8-4ce1-9ee5-7955dd79a232" />
+<img width="1352" height="1045" alt="image" src="https://github.com/user-attachments/assets/39aff425-79ac-4173-a9b6-667fe94b44bf" />
+<img width="1358" height="1127" alt="image" src="https://github.com/user-attachments/assets/5b21fbab-9bb8-41db-8ea6-dcb32523e3ec" />
+
+**Note** Actual query execution evidence is shown in `[SQL1]`. The generated explanation’s attribution of SQL text to `[K3]` is a citation limitation.
+
+##### Qwen combined query: document sources, SQL results, and tool execution record
+
+<img width="1580" height="641" alt="image" src="https://github.com/user-attachments/assets/dcb8be88-240b-4e7b-9fec-e27bcc0d45af" />
+<img width="1353" height="1064" alt="image" src="https://github.com/user-attachments/assets/c5d8d7c1-31dd-4d53-8634-77f3b514fd9f" />
+<img width="1339" height="1127" alt="image" src="https://github.com/user-attachments/assets/c9db693d-c406-4327-86f5-9a8e07c104ed" />
+<img width="1333" height="414" alt="image" src="https://github.com/user-attachments/assets/79c4f600-1e7a-484c-a0d3-3e6f4f4e73d9" />
 
 
 ### 8. Validate application logic and live model results
