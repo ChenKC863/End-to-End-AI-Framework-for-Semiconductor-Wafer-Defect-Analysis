@@ -126,6 +126,7 @@ and `.wafer_vectors/` are excluded from version control.
 The inference container and the React/FastAPI knowledge assistant are
 separate execution paths. The current Dockerfile packages the inference
 API; it does not package the React frontend or RAG/Agent services.
+
 ---
 
 ## 🚀 Getting Started
