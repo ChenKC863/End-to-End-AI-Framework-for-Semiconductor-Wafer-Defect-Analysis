@@ -369,7 +369,7 @@ Older screenshots using `ORDER BY anomaly_score DESC` demonstrate retrieval of t
 
 ## Recorded validation evidence and limits
 
-The saved report [knowledge-live-validation.json](knowledge-live-validation.json) records dataset S with llama3.2:3b: count 7,011, five ordered Donut rows matching SQLite, and source-excerpt fallback for both RAG cases. English generation omitted the S/M comparison; Chinese generation repeated the question. Its 12 checks passed, but both RAG generations were rejected.
+The saved report which would be docs/knowledge-live-validation.json records dataset S with llama3.2:3b: count 7,011, five ordered Donut rows matching SQLite, and source-excerpt fallback for both RAG cases. English generation omitted the S/M comparison; Chinese generation repeated the question. Its 12 checks passed, but both RAG generations were rejected.
 
 When copying this section into the repository-root README, use `docs/knowledge-live-validation.json` as the report link target.
 
