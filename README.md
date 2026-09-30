@@ -498,8 +498,8 @@ Passing checks does not establish semantic correctness. In particular, `extracti
 
 ## Recorded validation evidence and limits
 
-The saved report `docs/knowledge-live-validation.json` records dataset S with `llama3.2:3b`: a count of 7,011, five ordered Donut rows matching SQLite, and source-excerpt fallback for both
-RAG cases. English generation omitted the S/M comparison; Chinese generation repeated the question. All 12 evidence checks passed, but both RAG generations were rejected.
+The saved report `docs/knowledge-live-validation.json` records dataset S with `llama3.2:3b`. The Agent returned a count of 7,011 and five ordered Donut rows matching the SQLite baseline. Both standalone RAG cases used source-excerpt fallback: the English candidate omitted the requested S/M comparison, and the Chinese candidate repeated the question. 
+All 12 automated evidence checks passed, although both standalone RAG generation candidates were rejected. Separate browser demonstrations using Llama and Qwen are not results from this report.
 
 ## Training
 
