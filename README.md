@@ -328,6 +328,7 @@ generated SQL, and returned records. They are separate from the
 automated live-validation reports.
 
 ##### Chinese React queries
+
 <img width="1155" height="636" alt="image" src="https://github.com/user-attachments/assets/992af4f3-bb71-46c8-95ef-b0a98a09d440" />
 <img width="892" height="789" alt="image" src="https://github.com/user-attachments/assets/6924aa39-95a7-4187-aba4-ce7078db58ed" />
 <img width="1145" height="634" alt="image" src="https://github.com/user-attachments/assets/6c8f5c3b-c2a7-45ff-a5de-8800c07c1950" />
@@ -336,7 +337,9 @@ automated live-validation reports.
 <img width="817" height="773" alt="image" src="https://github.com/user-attachments/assets/0c76c101-157f-43c0-a501-e9727a60e567" />
 <img width="1127" height="631" alt="image" src="https://github.com/user-attachments/assets/c97e4cb6-f22f-4bad-936c-404557dd10c8" />
 <img width="816" height="772" alt="image" src="https://github.com/user-attachments/assets/557ac92b-7464-4d8f-9ad7-8d5cb47d0117" />
+
 ##### English React queries
+
 <img width="1128" height="631" alt="image" src="https://github.com/user-attachments/assets/f0ea8c86-3833-44b6-afbc-6aa55092bb9e" />
 <img width="825" height="777" alt="image" src="https://github.com/user-attachments/assets/5977fbec-27ce-4550-9a71-9a1d4faa7730" />
 <img width="1125" height="633" alt="image" src="https://github.com/user-attachments/assets/f319bc8f-e143-47be-bc2c-8711d5d1b77e" />
@@ -345,7 +348,9 @@ automated live-validation reports.
 <img width="814" height="775" alt="image" src="https://github.com/user-attachments/assets/95221ea8-fe79-4131-bdf9-0f8a3d2298eb" />
 <img width="1124" height="631" alt="image" src="https://github.com/user-attachments/assets/a85ff3d1-6c57-4310-ac02-6eff6cdad8ef" />
 <img width="814" height="774" alt="image" src="https://github.com/user-attachments/assets/d4957c86-6ab6-48fa-ad1b-00c8a3ca6edb" />
+
 ##### The example of explicit query for the class of Donut
+
 <img width="1547" height="609" alt="image" src="https://github.com/user-attachments/assets/3941d666-8d37-47fd-9326-e14aefd7d114" />
 <img width="1302" height="800" alt="image" src="https://github.com/user-attachments/assets/542b80b7-5e44-4ae1-8138-223197694772" />
 
