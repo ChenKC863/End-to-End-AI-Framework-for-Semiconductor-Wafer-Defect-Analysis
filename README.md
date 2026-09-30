@@ -327,7 +327,7 @@ These browser examples show selected datasets, models, prompts,
 generated SQL, and returned records. They are separate from the
 automated live-validation reports.
 
-##### i.) Chinese React queries
+##### (i.) Chinese React queries
 
 <img width="1155" height="636" alt="image" src="https://github.com/user-attachments/assets/992af4f3-bb71-46c8-95ef-b0a98a09d440" />
 <img width="892" height="789" alt="image" src="https://github.com/user-attachments/assets/6924aa39-95a7-4187-aba4-ce7078db58ed" />
@@ -338,7 +338,7 @@ automated live-validation reports.
 <img width="1127" height="631" alt="image" src="https://github.com/user-attachments/assets/c97e4cb6-f22f-4bad-936c-404557dd10c8" />
 <img width="816" height="772" alt="image" src="https://github.com/user-attachments/assets/557ac92b-7464-4d8f-9ad7-8d5cb47d0117" />
 
-##### ii.) English React queries
+##### (ii.) English React queries
 
 <img width="1128" height="631" alt="image" src="https://github.com/user-attachments/assets/f0ea8c86-3833-44b6-afbc-6aa55092bb9e" />
 <img width="825" height="777" alt="image" src="https://github.com/user-attachments/assets/5977fbec-27ce-4550-9a71-9a1d4faa7730" />
@@ -349,7 +349,7 @@ automated live-validation reports.
 <img width="1124" height="631" alt="image" src="https://github.com/user-attachments/assets/a85ff3d1-6c57-4310-ac02-6eff6cdad8ef" />
 <img width="814" height="774" alt="image" src="https://github.com/user-attachments/assets/d4957c86-6ab6-48fa-ad1b-00c8a3ca6edb" />
 
-##### iii.) The example of explicit query for the class of Donut
+##### (iii.) The example of explicit query for the class of Donut
 
 <img width="1547" height="609" alt="image" src="https://github.com/user-attachments/assets/3941d666-8d37-47fd-9326-e14aefd7d114" />
 <img width="1302" height="800" alt="image" src="https://github.com/user-attachments/assets/542b80b7-5e44-4ae1-8138-223197694772" />
@@ -360,19 +360,19 @@ automated live-validation reports.
 
 <img width="1522" height="664" alt="image" src="https://github.com/user-attachments/assets/3872cfbf-b4b4-47c9-b975-35b059cca86c" />
 
-##### i.) `/api/health` request and response
+##### (i.) `/api/health` request and response
 
 <img width="1347" height="747" alt="image" src="https://github.com/user-attachments/assets/ead2ae6f-55ee-44d6-b57b-77be1b6942b3" />
 <img width="1316" height="933" alt="image" src="https://github.com/user-attachments/assets/a50557ac-3c0b-44d9-a8db-c91af97146af" />
 
 The health response reports API status and model information. `inference_checked: false` means this request did not test model inference.
 
-##### ii.) `/api/overview` request and response
+##### (ii.) `/api/overview` request and response
 
 <img width="1481" height="244" alt="image" src="https://github.com/user-attachments/assets/f6567f04-9575-4de6-92c8-198f45731d6e" />
 <img width="1473" height="1127" alt="image" src="https://github.com/user-attachments/assets/b8c7945d-d728-4bdb-95b8-2a8665e00eb6" />
 
-##### iii.) `/api/query` request and response
+##### (iii.) `/api/query` request and response
 
 <img width="1458" height="994" alt="image" src="https://github.com/user-attachments/assets/ff211ddc-e91c-464c-a0b8-1ca10fad9ce6" />
 <img width="1456" height="747" alt="image" src="https://github.com/user-attachments/assets/fe4b8bb9-6823-4514-827b-a5626ee036a9" />
@@ -391,12 +391,12 @@ These are separate runs from the automated live-validation report.
 
 #### 4.) Agent — record count
 
-##### i.) English Agent count using Llama: answer and SQL evidence
+##### (i.) English Agent count using Llama: answer and SQL evidence
 
 <img width="1553" height="661" alt="image" src="https://github.com/user-attachments/assets/96532dc7-2167-4be7-8434-fa8fc32f3ccc" />
 <img width="1331" height="922" alt="image" src="https://github.com/user-attachments/assets/8532c74f-e9fc-48d0-beac-bcee1d1e06d6" />
 
-##### ii.) English Agent count using Qwen: answer and SQL evidence
+##### (ii.) English Agent count using Qwen: answer and SQL evidence
 
 <img width="1558" height="650" alt="image" src="https://github.com/user-attachments/assets/6e55da22-0a8d-480f-8076-e775acec54f7" />
 <img width="1334" height="920" alt="image" src="https://github.com/user-attachments/assets/2f66c5f1-8ffe-4dea-a198-ae67828218d3" />
@@ -432,7 +432,7 @@ directly across classes or S/M models.
 The screenshots below retain the actual prompts used in each
 browser run; their wording may differ from the compact example above.
 
-##### i.) Llama combined query: answer, document sources, and SQL results
+##### (i.) Llama combined query: answer, document sources, and SQL results
 
 <img width="1580" height="656" alt="image" src="https://github.com/user-attachments/assets/aa7186d1-8fa8-4ce1-9ee5-7955dd79a232" />
 <img width="1352" height="1045" alt="image" src="https://github.com/user-attachments/assets/39aff425-79ac-4173-a9b6-667fe94b44bf" />
@@ -440,7 +440,7 @@ browser run; their wording may differ from the compact example above.
 
 **Note** Actual query execution evidence is shown in `[SQL1]`. The generated explanation’s attribution of SQL text to `[K3]` is a citation limitation.
 
-##### ii.) Qwen combined query: document sources, SQL results, and tool execution record
+##### (ii.) Qwen combined query: document sources, SQL results, and tool execution record
 
 <img width="1580" height="641" alt="image" src="https://github.com/user-attachments/assets/dcb8be88-240b-4e7b-9fec-e27bcc0d45af" />
 <img width="1353" height="1064" alt="image" src="https://github.com/user-attachments/assets/c5d8d7c1-31dd-4d53-8634-77f3b514fd9f" />
