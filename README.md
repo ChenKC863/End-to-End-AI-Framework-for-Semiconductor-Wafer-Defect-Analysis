@@ -358,18 +358,24 @@ automated live-validation reports.
 
 ##### Swagger endpoint overview
 
+<img width="1522" height="664" alt="image" src="https://github.com/user-attachments/assets/3872cfbf-b4b4-47c9-b975-35b059cca86c" />
 
-##### /api/health request and response
+##### `/api/health` request and response
 
+<img width="1347" height="747" alt="image" src="https://github.com/user-attachments/assets/ead2ae6f-55ee-44d6-b57b-77be1b6942b3" />
+<img width="1316" height="933" alt="image" src="https://github.com/user-attachments/assets/a50557ac-3c0b-44d9-a8db-c91af97146af" />
 
-The health response reports API status and model information. inference_checked: false means this request did not test model inference.
+The health response reports API status and model information. `inference_checked: false` means this request did not test model inference.
 
-##### /api/overview request and response
+##### `/api/overview` request and response
 
+<img width="1481" height="244" alt="image" src="https://github.com/user-attachments/assets/f6567f04-9575-4de6-92c8-198f45731d6e" />
+<img width="1473" height="1127" alt="image" src="https://github.com/user-attachments/assets/b8c7945d-d728-4bdb-95b8-2a8665e00eb6" />
 
-##### /api/query request and response
+##### `/api/query` request and response
 
-
+<img width="1458" height="994" alt="image" src="https://github.com/user-attachments/assets/ff211ddc-e91c-464c-a0b8-1ca10fad9ce6" />
+<img width="1456" height="747" alt="image" src="https://github.com/user-attachments/assets/fe4b8bb9-6823-4514-827b-a5626ee036a9" />
 
 #### Agent — record count
 
