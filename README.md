@@ -162,6 +162,99 @@ To use a specific variant, set the environment variable `MODEL_VARIANT=S` or `MO
 
 • During inference, `infer.py` calls functions such as `preprocess_image_pil`. If `preprocess.py` is missing, inference will fail.
 
+### 4. Start the image inference API and Java client
+
+This service classifies uploaded images using ONNX models. It is separate from the SQLite query and RAG/Agent API in section 7.
+
+Run commands from the repository root. The examples below use Windows PowerShell and the `venv` environment created in section 2, with `requirements.txt` installed. Ensure Git LFS model files have been downloaded and the selected variant's model, encoder, and `variant.txt` are present.
+
+**Server — PowerShell**
+
+```powershell
+$variant = 'S'  # Choose S or M
+$env:ONNX_MODEL_PATH = "model/$variant/best_model.onnx"
+$env:LABEL_ENCODER_PATH = "model/$variant/label_encoder.pkl"
+$env:VARIANT_PATH = "model/$variant/variant.txt"
+$env:OLLAMA_URL = 'http://127.0.0.1:11434/api/generate'
+$env:OLLAMA_MODEL = 'llama3.2:3b'
+
+.\venv\Scripts\python.exe -m uvicorn inference_api:app --host 127.0.0.1 --port 8000
+```
+
+The `/predict` endpoint performs classification without calling Ollama. The separate `/predict_with_llm` endpoint adds generated commentary. Its current implementation uses a `/tmp/...` image path; Windows portability and temporary-file handling need correction before documenting it as a verified Windows workflow. Generated commentary is not manufacturing diagnosis evidence.
+
+API documentation: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+
+**Java client — another PowerShell terminal**
+
+With a JDK installed (JDK 11 or later recommended), compile from the project root:
+
+```powershell
+javac -encoding UTF-8 java_client/WaferDefectClient.java
+java -cp java_client WaferDefectClient java_client/test.jpg http://127.0.0.1:8000/predict
+```
+
+Replace `java_client/test.jpg` with an existing image path if that sample is unavailable. The classpath points Java to the directory containing the compiled class.
+
+Alternatively:
+
+```powershell
+curl.exe -X POST -F "file=@java_client/test.jpg" http://127.0.0.1:8000/predict
+```
+
+A successful request returns HTTP 200 and JSON containing `predicted_class`, `confidence`, and `probabilities`. Values depend on the supplied image and model. Record actual responses when presenting results.
+
+### 5. Run the image inference API with Docker
+
+The current Dockerfile launches Uvicorn on port 8000. Run it as an API service and upload an image by HTTP; do not append an image path to `docker run`.
+
+**Build from the checked-out source — PowerShell**
+
+```powershell
+git lfs pull
+docker build --build-arg MODEL_VARIANT=S -t wafer-model:S .
+docker run --rm -p 127.0.0.1:8000:8000 wafer-model:S
+```
+
+Stop any existing service on port 8000 before starting this container. For M, change both the build argument and image tag to M. Send a request from another terminal using the section 4 Java or `curl.exe` command. An image bind mount is unnecessary for HTTP uploads.
+
+Published images can be inspected at [Docker Hub](https://hub.docker.com/r/steven710382/wafer-model/tags). Verify the selected published tag's command and provenance before assuming it matches the current source:
+
+```powershell
+docker pull steven710382/wafer-model:S
+docker image inspect steven710382/wafer-model:S --format '{{json .Config.Cmd}}'
+```
+
+If the image starts the API service described above, run:
+
+```powershell
+docker run --rm -p 127.0.0.1:8000:8000 steven710382/wafer-model:S
+```
+
+This image does not include the React frontend, query API, or Qdrant knowledge index. Image publication alone is not runtime verification. The current build workflow also needs LFS checkout/download configured before it can reliably build with actual LFS model contents.
+
+### 6. Launch the Streamlit query interface
+
+This interface queries existing SQLite records; it does not classify an uploaded image. Run from the project root with both S/M SQLite files present.
+
+Ensure Ollama is running. Run `ollama serve` only if an existing Ollama service or desktop application is not already serving requests. Download the generation model you intend to use:
+
+```powershell
+ollama pull llama3.2:3b
+# Optional alternative model:
+ollama pull qwen2.5-coder:7b
+
+.\venv\Scripts\python.exe -m streamlit run wafer_llm_query/app.py
+```
+
+Open [http://127.0.0.1:8501](http://127.0.0.1:8501) and select the database, Ollama model, and response language.
+
+Use an explicit question, for example:
+
+> Among records where both true_label and pred_label are Donut, list the five lowest anomaly_score values with image_path and anomaly_score.
+
+
+
 ### 7. Launch the React query interface and RAG/Agent assistant
 
 This application uses FastAPI on port 8001, SQLite for wafer data, Ollama for generation and embeddings, and Qdrant local mode for curated document retrieval. It does not need the ONNX inference API on port 8000.
