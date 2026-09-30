@@ -401,7 +401,38 @@ These are separate runs from the automated live-validation report.
 <img width="1558" height="650" alt="image" src="https://github.com/user-attachments/assets/6e55da22-0a8d-480f-8076-e775acec54f7" />
 <img width="1334" height="920" alt="image" src="https://github.com/user-attachments/assets/2f66c5f1-8ffe-4dea-a198-ae67828218d3" />
 
-##### iii.) Llama combined query: answer, document sources, and SQL results
+#### 5.) Agent — records and document explanation
+
+Example question:
+
+> List the five lowest anomaly_score values where true_label and
+> pred_label are both Donut, showing image_path and anomaly_score.
+> Explain what a negative anomaly score means.
+
+The reference SQL for the data portion is:
+
+```sql
+SELECT image_path, anomaly_score
+FROM wafers
+WHERE LOWER(true_label) = 'donut'
+  AND LOWER(pred_label) = 'donut'
+ORDER BY anomaly_score ASC
+LIMIT 5;
+```
+
+This reference query defines the intended filtering and ordering;
+the model-generated SQL must still be checked against it.
+
+Lower Isolation Forest decision-function values indicate greater
+model-assessed abnormality within the same trained class-specific
+model. Scores are not probabilities or measurements of physical
+defect severity. They should not be used to compare severity
+directly across classes or S/M models.
+
+The screenshots below retain the actual prompts used in each
+browser run; their wording may differ from the compact example above.
+
+##### i.) Llama combined query: answer, document sources, and SQL results
 
 <img width="1580" height="656" alt="image" src="https://github.com/user-attachments/assets/aa7186d1-8fa8-4ce1-9ee5-7955dd79a232" />
 <img width="1352" height="1045" alt="image" src="https://github.com/user-attachments/assets/39aff425-79ac-4173-a9b6-667fe94b44bf" />
@@ -409,7 +440,7 @@ These are separate runs from the automated live-validation report.
 
 **Note** Actual query execution evidence is shown in `[SQL1]`. The generated explanation’s attribution of SQL text to `[K3]` is a citation limitation.
 
-##### iv.) Qwen combined query: document sources, SQL results, and tool execution record
+##### ii.) Qwen combined query: document sources, SQL results, and tool execution record
 
 <img width="1580" height="641" alt="image" src="https://github.com/user-attachments/assets/dcb8be88-240b-4e7b-9fec-e27bcc0d45af" />
 <img width="1353" height="1064" alt="image" src="https://github.com/user-attachments/assets/c5d8d7c1-31dd-4d53-8634-77f3b514fd9f" />
@@ -438,30 +469,6 @@ Check-only mode does not call Ollama. It evaluates 12 evidence checks, including
 
 Passing checks does not establish semantic correctness. In particular, `extractive_fallback` is an accepted explicit state: it indicates that source excerpts replaced a rejected or unavailable generated explanation. Browser interaction tests and Linux/deployment tests require separate evidence.
 
-## Example questions and interpretation
-
-**RAG — document explanation**
-
-> What does a negative anomaly_score mean? Can anomaly_score values from S and M be directly compared? Explain the limitations and cite the retrieved sources.
-
-**Agent — records and document explanation**
-
-> List the five lowest anomaly_score values where true_label and pred_label are both Donut, showing image_path and anomaly_score. Explain what a negative anomaly score means.
-
-For the data portion, the baseline SQL is:
-
-```sql
-SELECT image_path, anomaly_score
-FROM wafers
-WHERE LOWER(true_label) = 'donut'
-  AND LOWER(pred_label) = 'donut'
-ORDER BY anomaly_score ASC
-LIMIT 5;
-```
-
-This is a reference query, not a promise that the model always generates it. Lower Isolation Forest decision-function values indicate greater model-assessed abnormality within the same trained class-specific model. Scores are not probabilities or physical defect severity measurements, and should not be used to compare severity directly across classes or S/M models.
-
-Older screenshots using `ORDER BY anomaly_score DESC` demonstrate retrieval of the highest numerical scores, not the most anomalous records. A query filtering only `pred_label` also differs from the two-label baseline above. Label such screenshots as historical examples and retain their actual prompts and SQL; do not present them as evidence for this new baseline.
 
 ## Recorded validation evidence and limits
 
