@@ -321,7 +321,7 @@ npm.cmd run dev
 
 Open the URL printed by Vite (normally [http://127.0.0.1:5173/](http://127.0.0.1:5173/)); its API proxy targets port 8001. FastAPI and Ollama remain necessary. The built mode does not require Vite. Rebuild after frontend changes and restart the API after backend changes; these API commands do not enable automatic reload.
 
-#### React query demonstrations
+#### 1.) React query demonstrations
 
 These browser examples show selected datasets, models, prompts,
 generated SQL, and returned records. They are separate from the
@@ -354,7 +354,7 @@ automated live-validation reports.
 <img width="1547" height="609" alt="image" src="https://github.com/user-attachments/assets/3941d666-8d37-47fd-9326-e14aefd7d114" />
 <img width="1302" height="800" alt="image" src="https://github.com/user-attachments/assets/542b80b7-5e44-4ae1-8138-223197694772" />
 
-#### Swagger API demonstrations
+#### 2.) Swagger API demonstrations
 
 ##### Swagger endpoint overview
 
@@ -377,7 +377,7 @@ The health response reports API status and model information. `inference_checked
 <img width="1458" height="994" alt="image" src="https://github.com/user-attachments/assets/ff211ddc-e91c-464c-a0b8-1ca10fad9ce6" />
 <img width="1456" height="747" alt="image" src="https://github.com/user-attachments/assets/fe4b8bb9-6823-4514-827b-a5626ee036a9" />
 
-#### Agent — record count
+#### 3.) Agent — record count
 
 The following browser examples ask for the total number of records
 and display the SQL evidence.
