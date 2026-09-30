@@ -377,10 +377,19 @@ The health response reports API status and model information. `inference_checked
 <img width="1458" height="994" alt="image" src="https://github.com/user-attachments/assets/ff211ddc-e91c-464c-a0b8-1ca10fad9ce6" />
 <img width="1456" height="747" alt="image" src="https://github.com/user-attachments/assets/fe4b8bb9-6823-4514-827b-a5626ee036a9" />
 
-#### 3.) Agent — record count
+#### 3.) RAG — document explanation
 
-The following browser examples ask for the total number of records
-and display the SQL evidence.
+Example question:
+
+> What does a negative anomaly_score mean? Can anomaly_score values
+> from S and M be directly compared? Explain the limitations and
+> cite the retrieved sources.
+
+The following browser examples show generated answers, retrieved
+sources, and any validation warnings or fallback outcomes.
+These are separate runs from the automated live-validation report.
+
+#### 4.) Agent — record count
 
 ##### i.) English Agent count using Llama: answer and SQL evidence
 
