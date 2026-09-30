@@ -183,7 +183,7 @@ $env:OLLAMA_MODEL = 'llama3.2:3b'
 
 The `/predict` endpoint performs classification without calling Ollama. The separate `/predict_with_llm` endpoint adds generated commentary. Its current implementation uses a `/tmp/...` image path; Windows portability and temporary-file handling need correction before documenting it as a verified Windows workflow. Generated commentary is not manufacturing diagnosis evidence.
 
-API documentation: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+API documentation: http://127.0.0.1:8000/docs.
 
 **Java client — another PowerShell terminal**
 
@@ -247,7 +247,7 @@ ollama pull qwen2.5-coder:7b
 .\venv\Scripts\python.exe -m streamlit run wafer_llm_query/app.py
 ```
 
-Open [http://127.0.0.1:8501](http://127.0.0.1:8501) and select the database, Ollama model, and response language.
+Open http://127.0.0.1:8501 and select the database, Ollama model, and response language.
 
 Use an explicit question, for example:
 
