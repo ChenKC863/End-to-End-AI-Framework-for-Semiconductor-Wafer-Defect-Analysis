@@ -389,7 +389,33 @@ The following browser examples show generated answers, retrieved
 sources, and any validation warnings or fallback outcomes.
 These are separate runs from the automated live-validation report.
 
+##### (i.) English RAG using Llama
+
+<img width="1694" height="633" alt="image" src="https://github.com/user-attachments/assets/dcf42897-6d0a-4348-87b9-b69ed76944e8" />
+<img width="1461" height="1023" alt="image" src="https://github.com/user-attachments/assets/2f8ca614-6839-4242-a576-d01fee18f817" />
+
+##### (ii.) English RAG using Qwen
+
+<img width="1681" height="661" alt="image" src="https://github.com/user-attachments/assets/4f4d523e-5839-453f-804b-4d76f3ca74b0" />
+<img width="1464" height="1020" alt="image" src="https://github.com/user-attachments/assets/ef31460a-3bc0-43a0-bc3d-a4a40562a66f" />
+
+##### (iii.) Traditional Chinese RAG using Llama — fallback
+
+<img width="1558" height="586" alt="image" src="https://github.com/user-attachments/assets/bc7cb6f4-f880-4ebf-9495-655af7543fae" />
+<img width="1336" height="1222" alt="image" src="https://github.com/user-attachments/assets/4515bd82-4ca5-4198-89af-1069f8595b37" />
+
+##### (iv.) Traditional Chinese RAG using Qwen
+
+<img width="1561" height="597" alt="image" src="https://github.com/user-attachments/assets/59703590-ead8-48ac-87e5-04768ca5580f" />
+<img width="1339" height="1127" alt="image" src="https://github.com/user-attachments/assets/6832b26e-5d33-4c47-816f-84c149410bfc" />
+
 #### 4.) Agent — record count
+
+Example question:
+
+> Please determine the total number of records in the `wafers`
+> table for the currently selected dataset and provide the SQL
+> query as evidence.
 
 ##### (i.) English Agent count using Llama: answer and SQL evidence
 
