@@ -306,9 +306,9 @@ $env:OLLAMA_MODEL = 'llama3.2:3b'
 
 Use one API worker for the Qdrant local demonstration. Environment variables set in Terminal D do not automatically apply to Terminal B.
 
-- Built React application: [http://127.0.0.1:8001/](http://127.0.0.1:8001/)
-- Swagger API documentation: [http://127.0.0.1:8001/docs](http://127.0.0.1:8001/docs)
-- Knowledge-index status: [http://127.0.0.1:8001/api/knowledge/status](http://127.0.0.1:8001/api/knowledge/status)
+- Built React application: http://127.0.0.1:8001/
+- Swagger API documentation: http://127.0.0.1:8001/docs
+- Knowledge-index status: http://127.0.0.1:8001/api/knowledge/status
 
 Select S or M, a generation model, and English or Traditional Chinese. Use the SQL query interface for records, RAG for document questions, or Agent for document retrieval and/or SQL. Explicit model selections in requests take precedence over applicable backend defaults.
 
@@ -319,7 +319,7 @@ cd frontend
 npm.cmd run dev
 ```
 
-Open the URL printed by Vite (normally [http://127.0.0.1:5173/](http://127.0.0.1:5173/)); its API proxy targets port 8001. FastAPI and Ollama remain necessary. The built mode does not require Vite. Rebuild after frontend changes and restart the API after backend changes; these API commands do not enable automatic reload.
+Open the URL printed by Vite (normally http://127.0.0.1:5173/); its API proxy targets port 8001. FastAPI and Ollama remain necessary. The built mode does not require Vite. Rebuild after frontend changes and restart the API after backend changes; these API commands do not enable automatic reload.
 
 #### 1.) React query demonstrations
 
