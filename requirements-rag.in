@@ -1,0 +1,2 @@
+-r requirements-react.in
+qdrant-client==1.19.1

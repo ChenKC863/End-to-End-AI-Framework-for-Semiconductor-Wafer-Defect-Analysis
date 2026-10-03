@@ -1,0 +1,231 @@
+{
+  "executed_at": "2026-09-26T00:46:29.526511+00:00",
+  "base_url": "http://127.0.0.1:8001",
+  "model": "llama3.2:3b",
+  "cases": [
+    {
+      "mode": "rag",
+      "question": "What does a negative anomaly score mean? Can scores be compared across S and M?",
+      "language": "en",
+      "status": 200,
+      "response": {
+        "mode": "rag",
+        "answer": "The generated explanation failed validation or is unavailable. Showing the retrieved source excerpt.\nThis project stores class-specific Isolation Forest decision_function scores as anomaly_score. Within the same trained class-specific model, lower scores indicate greater model-assessed abnormality. A score below zero indicates an anomaly. Scores are not probabilities or measurements of physical defect severity. Do not compare severity directly across predicted classes or EfficientNetV2-S and M models. [K1]",
+        "sources": [
+          {
+            "id": "K1",
+            "score": 0.587721,
+            "source": "anomaly-scores.md",
+            "start_line": 1,
+            "end_line": 7,
+            "text": "# Anomaly score interpretation / 異常分數\n\nThis project stores class-specific Isolation Forest decision_function scores as anomaly_score. Within the same trained class-specific model, lower scores indicate greater model-assessed abnormality. A score below zero indicates an anomaly. Scores are not probabilities or measurements of physical defect severity. Do not compare severity directly across predicted classes or EfficientNetV2-S and M models.\n\n本專案 anomaly_score 是各類別 Isolation Forest 的 decision_function 分數。同一個已訓練類別模型內，分數越低越異常，零為判定門檻。分數不是異常機率，也不能直接比較不同類別或 S/M 模型的實體缺陷嚴重程度。\n\nSource: Doc1.docx, Slide 46A score interpretation; the-defect-analysis-of-wafer.ipynb anomaly scoring pipeline. This note describes the project, not a manufacturing diagnosis."
+          }
+        ],
+        "citations": [
+          "K1"
+        ],
+        "sql_result": null,
+        "trace": [
+          {
+            "tool": "search_knowledge",
+            "status": "ok",
+            "matches": 1
+          },
+          {
+            "tool": "generate_explanation",
+            "status": "rejected",
+            "candidate": "{\"sentences\": [{\"text\": \"A score below zero indicates an anomaly.\", \"source_ids\": [\"K1\"],\"quote\": \"A score below zero indicates an anomaly.\"}]}",
+            "reasons": [
+              "The response omitted the requested S/M comparison limitation."
+            ]
+          }
+        ],
+        "warning": "The response omitted the requested S/M comparison limitation.",
+        "model": "llama3.2:3b",
+        "language": "en",
+        "generation_status": "extractive_fallback",
+        "grounding": "source_ids_and_quotes_checked"
+      }
+    },
+    {
+      "mode": "rag",
+      "question": "負的異常分數代表什麼？可以直接比較 S 和 M 的異常分數嗎？",
+      "language": "zh",
+      "status": 200,
+      "response": {
+        "mode": "rag",
+        "answer": "生成說明未通過驗證或暫時無法使用，以下顯示檢索來源原文。\n本專案 anomaly_score 是各類別 Isolation Forest 的 decision_function 分數。同一個已訓練類別模型內，分數越低越異常，零為判定門檻。分數不是異常機率，也不能直接比較不同類別或 S/M 模型的實體缺陷嚴重程度。 [K1]",
+        "sources": [
+          {
+            "id": "K1",
+            "score": 0.565789,
+            "source": "anomaly-scores.md",
+            "start_line": 1,
+            "end_line": 7,
+            "text": "# Anomaly score interpretation / 異常分數\n\nThis project stores class-specific Isolation Forest decision_function scores as anomaly_score. Within the same trained class-specific model, lower scores indicate greater model-assessed abnormality. A score below zero indicates an anomaly. Scores are not probabilities or measurements of physical defect severity. Do not compare severity directly across predicted classes or EfficientNetV2-S and M models.\n\n本專案 anomaly_score 是各類別 Isolation Forest 的 decision_function 分數。同一個已訓練類別模型內，分數越低越異常，零為判定門檻。分數不是異常機率，也不能直接比較不同類別或 S/M 模型的實體缺陷嚴重程度。\n\nSource: Doc1.docx, Slide 46A score interpretation; the-defect-analysis-of-wafer.ipynb anomaly scoring pipeline. This note describes the project, not a manufacturing diagnosis."
+          }
+        ],
+        "citations": [
+          "K1"
+        ],
+        "sql_result": null,
+        "trace": [
+          {
+            "tool": "search_knowledge",
+            "status": "ok",
+            "matches": 1
+          },
+          {
+            "tool": "generate_explanation",
+            "status": "rejected",
+            "candidate": "{\"sentences\": [{\"text\": \"負的異常分數代表什麼？\", \"source_ids\": [\"K1\"], \"quote\": \"A score below zero indicates an anomaly.\"}, {\"text\": \"可以直接比較 S 和 M 的異常分數嗎？\", \"source_ids\": [\"K1\"], \"quote\": \"Do not compare severity directly across predicted classes or EfficientNetV2-S and M models.\"}]}",
+            "reasons": [
+              "生成內容重複了問題，因此未採用。"
+            ]
+          }
+        ],
+        "warning": "生成內容重複了問題，因此未採用。",
+        "model": "llama3.2:3b",
+        "language": "zh",
+        "generation_status": "extractive_fallback",
+        "grounding": "source_ids_and_quotes_checked"
+      }
+    },
+    {
+      "mode": "agent",
+      "question": "How many records are in the wafer database?",
+      "language": "en",
+      "status": 200,
+      "response": {
+        "mode": "agent",
+        "answer": "The wafers table in dataset S contains 7,011 records. [SQL1]",
+        "sources": [],
+        "citations": [
+          "SQL1"
+        ],
+        "sql_result": {
+          "columns": [
+            "COUNT(*)"
+          ],
+          "rows": [
+            [
+              7011
+            ]
+          ],
+          "truncated": false,
+          "sql": "SELECT COUNT(*) FROM wafers",
+          "database": "S",
+          "id": "SQL1"
+        },
+        "trace": [
+          {
+            "tool": "query_wafer_sql",
+            "status": "ok",
+            "rows": 1
+          }
+        ],
+        "warning": null,
+        "model": "llama3.2:3b",
+        "language": "en",
+        "generation_status": "deterministic_sql",
+        "grounding": "source_ids_and_quotes_checked"
+      }
+    },
+    {
+      "mode": "agent",
+      "question": "List the five lowest anomaly_score values where true_label and pred_label are both Donut, showing image_path and anomaly_score. Explain what a negative anomaly score means.",
+      "language": "en",
+      "status": 200,
+      "response": {
+        "mode": "agent",
+        "answer": "SQL returned 5 row(s) from dataset S. Returned score range: -0.059801 to -0.015675 [SQL1].\n\nA score below zero indicates an anomaly. [K1]\nlower scores indicate greater model-assessed abnormality. [K1]",
+        "sources": [
+          {
+            "id": "K1",
+            "score": 0.586275,
+            "source": "anomaly-scores.md",
+            "start_line": 1,
+            "end_line": 7,
+            "text": "# Anomaly score interpretation / 異常分數\n\nThis project stores class-specific Isolation Forest decision_function scores as anomaly_score. Within the same trained class-specific model, lower scores indicate greater model-assessed abnormality. A score below zero indicates an anomaly. Scores are not probabilities or measurements of physical defect severity. Do not compare severity directly across predicted classes or EfficientNetV2-S and M models.\n\n本專案 anomaly_score 是各類別 Isolation Forest 的 decision_function 分數。同一個已訓練類別模型內，分數越低越異常，零為判定門檻。分數不是異常機率，也不能直接比較不同類別或 S/M 模型的實體缺陷嚴重程度。\n\nSource: Doc1.docx, Slide 46A score interpretation; the-defect-analysis-of-wafer.ipynb anomaly scoring pipeline. This note describes the project, not a manufacturing diagnosis."
+          },
+          {
+            "id": "K2",
+            "score": 0.457285,
+            "source": "database-schema.md",
+            "start_line": 1,
+            "end_line": 7,
+            "text": "# Wafer database fields / 資料欄位\n\nThe wafers table contains id, image_path, split, true_label, pred_label, pred_prob, anomaly_score, and is_anomaly. true_label is the ground-truth category. pred_label is the classifier prediction. split identifies train, valid, or test. pred_prob is classifier confidence, not the anomaly score. Dataset S and M are separate SQLite files.\n\ntrue_label 是真實類別，pred_label 是預測類別。問題同時要求兩種條件時，必須分別篩選兩個欄位。最低異常分數使用 ASC 排序。只要求分數排名時，不額外加入 is_anomaly = 1。統計筆數或影像排名必須查詢 SQLite，文件檢索不提供即時筆數。\n\nSource: wafer_llm_query/react_api.py, SYSTEM_PROMPT and DATABASES. Retrieve actual counts through the SQL tool instead of treating documentation as current data."
+          }
+        ],
+        "citations": [
+          "K1",
+          "SQL1"
+        ],
+        "sql_result": {
+          "columns": [
+            "image_path",
+            "anomaly_score"
+          ],
+          "rows": [
+            [
+              "/kaggle/input/multi-class-semiconductor-wafer/Semiconductor_wafer/train/Donut/image_Donut_24446_png_jpg.rf.cec8d7b3ecac417369643bea7d9c3cec.jpg",
+              -0.05980068656951454
+            ],
+            [
+              "/kaggle/input/multi-class-semiconductor-wafer/Semiconductor_wafer/train/Donut/image_Donut_24185_png_jpg.rf.7193efbfad82bd10ed60902d4d54973f.jpg",
+              -0.05884876326652999
+            ],
+            [
+              "/kaggle/input/multi-class-semiconductor-wafer/Semiconductor_wafer/valid/Donut/image_Donut_24342_png_jpg.rf.2d04b430222a167e16016816307869fe.jpg",
+              -0.03483114924066155
+            ],
+            [
+              "/kaggle/input/multi-class-semiconductor-wafer/Semiconductor_wafer/train/Donut/image_Donut_24185_png_jpg.rf.15d73519f5e7b20995b0ffbc3d670e37.jpg",
+              -0.03293832995010315
+            ],
+            [
+              "/kaggle/input/multi-class-semiconductor-wafer/Semiconductor_wafer/test/Donut/image_Donut_24643_png_jpg.rf.4ca7ad198b79350be3c6f9bac5bc9301.jpg",
+              -0.015675448187265073
+            ]
+          ],
+          "truncated": false,
+          "sql": "SELECT image_path, anomaly_score FROM wafers WHERE LOWER(true_label) = LOWER('Donut') AND LOWER(pred_label) = LOWER('Donut') ORDER BY anomaly_score ASC LIMIT 5;",
+          "database": "S",
+          "id": "SQL1"
+        },
+        "trace": [
+          {
+            "tool": "search_knowledge",
+            "status": "ok",
+            "matches": 2
+          },
+          {
+            "tool": "query_wafer_sql",
+            "status": "ok",
+            "rows": 5
+          }
+        ],
+        "warning": null,
+        "model": "llama3.2:3b",
+        "language": "en",
+        "generation_status": "generated",
+        "grounding": "source_ids_and_quotes_checked"
+      }
+    }
+  ],
+  "automated_evidence_checks": {
+    "case_1_http_and_citations": true,
+    "case_1_explicit_answer_status": true,
+    "case_2_http_and_citations": true,
+    "case_2_explicit_answer_status": true,
+    "case_3_http_and_citations": true,
+    "case_3_explicit_answer_status": true,
+    "case_4_http_and_citations": true,
+    "case_4_explicit_answer_status": true,
+    "count_matches_sqlite": true,
+    "count_answer_contains_value": true,
+    "donut_rows_match_sqlite": true,
+    "mixed_question_uses_both_tools": true
+  },
+  "semantic_review_required": true
+}
