@@ -73,3 +73,7 @@ Desktop.ini
 # Keep README, LICENSE, source, tests, requirements, and validation reports.
 # Keep the root S/M SQLite databases used by the demo and baseline checks.
 # Release models under model/ are managed by .gitattributes (Git LFS).
+
+/docs/images/
+
+/docs/DEMONSTRATION_GALLERY.md
