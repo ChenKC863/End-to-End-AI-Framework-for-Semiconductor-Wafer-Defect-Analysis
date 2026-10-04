@@ -1,10 +1,9 @@
-# Wafer Defect Classification with ONNX
+# End-to-End AI Framework for Semiconductor Wafer Defect Analysis
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker Pulls](https://img.shields.io/docker/pulls/steven710382/wafer-model)](https://hub.docker.com/r/steven710382/wafer-model)
 
-Pre‑trained EfficientNetV2 model for 9‑class wafer defect classification, converted to ONNX and ready for inference.
-
+An end-to-end AI framework for 9-class semiconductor wafer defect analysis, integrating EfficientNetV2-based classification, class-wise anomaly detection, ONNX Runtime deployment, SQLite analytics, natural-language querying, Local LLM, RAG/AI Agent workflows, and React/FastAPI interfaces.
 ## Dataset
 
 - **Source**: [Multi‑class Semiconductor Wafer Image Dataset](https://www.kaggle.com/datasets/drtawfikrrahman/multi-class-semiconductor-wafer-image-dataset)  
