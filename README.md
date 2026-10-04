@@ -3,7 +3,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker Pulls](https://img.shields.io/docker/pulls/steven710382/wafer-model)](https://hub.docker.com/r/steven710382/wafer-model)
 
-An end-to-end AI framework for 9-class semiconductor wafer defect analysis, integrating EfficientNetV2-based classification, class-wise anomaly detection, ONNX Runtime deployment, SQLite analytics, natural-language querying, Local LLM, RAG/AI Agent workflows, and React/FastAPI interfaces.
+An end-to-end AI framework for semiconductor wafer defect analysis, integrating EfficientNetV2-S/M classification, class-wise PCA/Isolation Forest anomaly detection, ONNX Runtime deployment, SQLite analytics, FastAPI services, Local LLM-powered natural-language querying, RAG/AI Agent workflows, and a React-based user interface.
+
 ## Dataset
 
 - **Source**: [Multi‑class Semiconductor Wafer Image Dataset](https://www.kaggle.com/datasets/drtawfikrrahman/multi-class-semiconductor-wafer-image-dataset)  
@@ -133,7 +134,7 @@ API; it does not package the React frontend or RAG/Agent services.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/ChenKC863/Semiconductor-Wafer-Defect-Analysis--A-Machine-Learning-Framework.git
+git clone https://github.com/ChenKC863/End-to-End-AI-Framework-for-Semiconductor-Wafer-Defect-Analysis.git
 ```
 
 ### 2. Set up Python environment
